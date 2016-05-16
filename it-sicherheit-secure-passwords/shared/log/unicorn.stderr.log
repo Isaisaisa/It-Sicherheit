@@ -1,0 +1,91 @@
+I, [2016-05-15T20:23:14.405380 #17452]  INFO -- : Refreshing Gem list
+I, [2016-05-15T20:23:15.781714 #17452]  INFO -- : unlinking existing socket=/home/torben/its-rails/it-sicherheit-secure-passwords/shared/sockets/unicorn.sock
+I, [2016-05-15T20:23:15.781882 #17452]  INFO -- : listening on addr=/home/torben/its-rails/it-sicherheit-secure-passwords/shared/sockets/unicorn.sock fd=10
+I, [2016-05-15T20:23:15.782119 #17452]  INFO -- : listening on addr=0.0.0.0:3000 fd=11
+I, [2016-05-15T20:23:15.782221 #17452]  INFO -- : worker=0 spawning...
+I, [2016-05-15T20:23:15.783641 #17452]  INFO -- : worker=1 spawning...
+I, [2016-05-15T20:23:15.784072 #17495]  INFO -- : worker=0 spawned pid=17495
+I, [2016-05-15T20:23:15.784205 #17495]  INFO -- : worker=0 ready
+I, [2016-05-15T20:23:15.785286 #17452]  INFO -- : master process ready
+I, [2016-05-15T20:23:15.785709 #17498]  INFO -- : worker=1 spawned pid=17498
+I, [2016-05-15T20:23:15.785852 #17498]  INFO -- : worker=1 ready
+E, [2016-05-15T20:23:39.549912 #17495] ERROR -- : app error: Missing `secret_token` and `secret_key_base` for 'production' environment, set these values in `config/secrets.yml` (RuntimeError)
+E, [2016-05-15T20:23:39.550181 #17495] ERROR -- : /home/torben/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/railties-4.2.6/lib/rails/application.rb:534:in `validate_secret_key_config!'
+E, [2016-05-15T20:23:39.550252 #17495] ERROR -- : /home/torben/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/railties-4.2.6/lib/rails/application.rb:246:in `env_config'
+E, [2016-05-15T20:23:39.550310 #17495] ERROR -- : /home/torben/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/railties-4.2.6/lib/rails/engine.rb:514:in `call'
+E, [2016-05-15T20:23:39.550369 #17495] ERROR -- : /home/torben/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/railties-4.2.6/lib/rails/application.rb:165:in `call'
+E, [2016-05-15T20:23:39.550422 #17495] ERROR -- : /home/torben/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/unicorn-5.1.0/lib/unicorn/http_server.rb:562:in `process_client'
+E, [2016-05-15T20:23:39.550464 #17495] ERROR -- : /home/torben/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/unicorn-5.1.0/lib/unicorn/http_server.rb:658:in `worker_loop'
+E, [2016-05-15T20:23:39.550511 #17495] ERROR -- : /home/torben/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/unicorn-5.1.0/lib/unicorn/http_server.rb:508:in `spawn_missing_workers'
+E, [2016-05-15T20:23:39.550558 #17495] ERROR -- : /home/torben/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/unicorn-5.1.0/lib/unicorn/http_server.rb:132:in `start'
+E, [2016-05-15T20:23:39.550603 #17495] ERROR -- : /home/torben/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/unicorn-5.1.0/bin/unicorn:126:in `<top (required)>'
+E, [2016-05-15T20:23:39.550652 #17495] ERROR -- : /home/torben/.rbenv/versions/2.3.0/bin/unicorn:23:in `load'
+E, [2016-05-15T20:23:39.550690 #17495] ERROR -- : /home/torben/.rbenv/versions/2.3.0/bin/unicorn:23:in `<top (required)>'
+E, [2016-05-15T20:23:39.550733 #17495] ERROR -- : /home/torben/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/bundler-1.12.3/lib/bundler/cli/exec.rb:63:in `load'
+E, [2016-05-15T20:23:39.550780 #17495] ERROR -- : /home/torben/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/bundler-1.12.3/lib/bundler/cli/exec.rb:63:in `kernel_load'
+E, [2016-05-15T20:23:39.550824 #17495] ERROR -- : /home/torben/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/bundler-1.12.3/lib/bundler/cli/exec.rb:24:in `run'
+E, [2016-05-15T20:23:39.550863 #17495] ERROR -- : /home/torben/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/bundler-1.12.3/lib/bundler/cli.rb:304:in `exec'
+E, [2016-05-15T20:23:39.550907 #17495] ERROR -- : /home/torben/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/bundler-1.12.3/lib/bundler/vendor/thor/lib/thor/command.rb:27:in `run'
+E, [2016-05-15T20:23:39.551083 #17495] ERROR -- : /home/torben/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/bundler-1.12.3/lib/bundler/vendor/thor/lib/thor/invocation.rb:126:in `invoke_command'
+E, [2016-05-15T20:23:39.551128 #17495] ERROR -- : /home/torben/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/bundler-1.12.3/lib/bundler/vendor/thor/lib/thor.rb:359:in `dispatch'
+E, [2016-05-15T20:23:39.551180 #17495] ERROR -- : /home/torben/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/bundler-1.12.3/lib/bundler/vendor/thor/lib/thor/base.rb:440:in `start'
+E, [2016-05-15T20:23:39.551219 #17495] ERROR -- : /home/torben/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/bundler-1.12.3/lib/bundler/cli.rb:11:in `start'
+E, [2016-05-15T20:23:39.551257 #17495] ERROR -- : /home/torben/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/bundler-1.12.3/exe/bundle:27:in `block in <top (required)>'
+E, [2016-05-15T20:23:39.551296 #17495] ERROR -- : /home/torben/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/bundler-1.12.3/lib/bundler/friendly_errors.rb:98:in `with_friendly_errors'
+E, [2016-05-15T20:23:39.551340 #17495] ERROR -- : /home/torben/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/bundler-1.12.3/exe/bundle:19:in `<top (required)>'
+E, [2016-05-15T20:23:39.551383 #17495] ERROR -- : /home/torben/.rbenv/versions/2.3.0/bin/bundle:23:in `load'
+E, [2016-05-15T20:23:39.551496 #17495] ERROR -- : /home/torben/.rbenv/versions/2.3.0/bin/bundle:23:in `<main>'
+I, [2016-05-15T20:27:16.738385 #17452]  INFO -- : reaped #<Process::Status: pid 17495 exit 0> worker=0
+I, [2016-05-15T20:27:16.738521 #17452]  INFO -- : reaped #<Process::Status: pid 17498 exit 0> worker=1
+I, [2016-05-15T20:27:16.738612 #17452]  INFO -- : master complete
+I, [2016-05-15T20:27:28.098866 #17583]  INFO -- : Refreshing Gem list
+I, [2016-05-15T20:27:29.234495 #17583]  INFO -- : unlinking existing socket=/home/torben/its-rails/it-sicherheit-secure-passwords/shared/sockets/unicorn.sock
+I, [2016-05-15T20:27:29.235151 #17583]  INFO -- : listening on addr=/home/torben/its-rails/it-sicherheit-secure-passwords/shared/sockets/unicorn.sock fd=10
+I, [2016-05-15T20:27:29.235392 #17583]  INFO -- : listening on addr=0.0.0.0:3000 fd=11
+I, [2016-05-15T20:27:29.235475 #17583]  INFO -- : worker=0 spawning...
+I, [2016-05-15T20:27:29.236753 #17583]  INFO -- : worker=1 spawning...
+I, [2016-05-15T20:27:29.237225 #17614]  INFO -- : worker=0 spawned pid=17614
+I, [2016-05-15T20:27:29.237395 #17614]  INFO -- : worker=0 ready
+I, [2016-05-15T20:27:29.238098 #17583]  INFO -- : master process ready
+I, [2016-05-15T20:27:29.238421 #17617]  INFO -- : worker=1 spawned pid=17617
+I, [2016-05-15T20:27:29.238518 #17617]  INFO -- : worker=1 ready
+127.0.0.1 - - [15/May/2016:20:27:34 +0200] "GET %2Findex.html HTTP/1.1" 200 268 0.0783
+E, [2016-05-15T20:28:06.245149 #17583] ERROR -- : worker=0 PID:17614 timeout (31s > 30s), killing
+E, [2016-05-15T20:28:06.247774 #17583] ERROR -- : reaped #<Process::Status: pid 17614 SIGKILL (signal 9)> worker=0
+I, [2016-05-15T20:28:06.248030 #17583]  INFO -- : worker=0 spawning...
+I, [2016-05-15T20:28:06.251052 #17648]  INFO -- : worker=0 spawned pid=17648
+I, [2016-05-15T20:28:06.251304 #17648]  INFO -- : worker=0 ready
+I, [2016-05-15T20:31:53.116360 #17583]  INFO -- : reaped #<Process::Status: pid 17617 exit 0> worker=1
+I, [2016-05-15T20:31:53.116488 #17583]  INFO -- : reaped #<Process::Status: pid 17648 exit 0> worker=0
+I, [2016-05-15T20:31:53.116834 #17583]  INFO -- : master complete
+I, [2016-05-15T20:37:24.296824 #17811]  INFO -- : Refreshing Gem list
+I, [2016-05-15T20:37:25.596824 #17811]  INFO -- : unlinking existing socket=/home/torben/its-rails/it-sicherheit-secure-passwords/shared/sockets/unicorn.sock
+I, [2016-05-15T20:37:25.597039 #17811]  INFO -- : listening on addr=/home/torben/its-rails/it-sicherheit-secure-passwords/shared/sockets/unicorn.sock fd=10
+I, [2016-05-15T20:37:25.597484 #17811]  INFO -- : listening on addr=0.0.0.0:3000 fd=11
+I, [2016-05-15T20:37:25.597653 #17811]  INFO -- : worker=0 spawning...
+I, [2016-05-15T20:37:25.599702 #17811]  INFO -- : worker=1 spawning...
+I, [2016-05-15T20:37:25.600122 #17843]  INFO -- : worker=0 spawned pid=17843
+I, [2016-05-15T20:37:25.600264 #17843]  INFO -- : worker=0 ready
+I, [2016-05-15T20:37:25.601642 #17811]  INFO -- : master process ready
+I, [2016-05-15T20:37:25.601979 #17846]  INFO -- : worker=1 spawned pid=17846
+I, [2016-05-15T20:37:25.602110 #17846]  INFO -- : worker=1 ready
+I, [2016-05-15T21:21:32.043693 #17811]  INFO -- : reloading config_file=config/unicorn.rb
+I, [2016-05-15T21:21:32.122668 #17811]  INFO -- : Refreshing Gem list
+I, [2016-05-15T21:21:32.137482 #17811]  INFO -- : done reloading config_file=config/unicorn.rb
+I, [2016-05-15T21:21:32.137588 #17811]  INFO -- : reloading config_file=config/unicorn.rb
+I, [2016-05-15T21:21:32.149914 #17811]  INFO -- : Refreshing Gem list
+I, [2016-05-15T21:21:32.151758 #17811]  INFO -- : done reloading config_file=config/unicorn.rb
+I, [2016-05-15T21:21:32.151913 #17811]  INFO -- : reaped #<Process::Status: pid 17843 exit 0> worker=0
+I, [2016-05-15T21:21:32.152017 #17811]  INFO -- : worker=0 spawning...
+I, [2016-05-15T21:21:32.154830 #18206]  INFO -- : worker=0 spawned pid=18206
+I, [2016-05-15T21:21:32.155033 #18206]  INFO -- : worker=0 ready
+I, [2016-05-15T21:21:32.174915 #17811]  INFO -- : reaped #<Process::Status: pid 17846 exit 0> worker=1
+I, [2016-05-15T21:21:32.175093 #17811]  INFO -- : worker=1 spawning...
+I, [2016-05-15T21:21:32.177763 #18209]  INFO -- : worker=1 spawned pid=18209
+I, [2016-05-15T21:21:32.177960 #18209]  INFO -- : worker=1 ready
+I, [2016-05-15T21:21:39.898755 #17811]  INFO -- : reaped #<Process::Status: pid 18206 exit 0> worker=0
+I, [2016-05-15T21:21:39.898876 #17811]  INFO -- : reloading config_file=config/unicorn.rb
+I, [2016-05-15T21:21:39.911500 #17811]  INFO -- : Refreshing Gem list
+I, [2016-05-15T21:21:39.913844 #17811]  INFO -- : done reloading config_file=config/unicorn.rb
+I, [2016-05-15T21:21:39.913979 #17811]  INFO -- : reaped #<Process::Status: pid 18209 exit 0> worker=1
+I, [2016-05-15T21:21:39.914500 #17811]  INFO -- : master complete
