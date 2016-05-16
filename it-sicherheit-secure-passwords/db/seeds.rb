@@ -9,21 +9,25 @@
 User.create!(name:  "Test User",
              email: "test@user.de",
              password:              "test123",
-             password_confirmation: "test123")
+             password_confirmation: "test123",
+             email_confirmed: true)
 
 User.create!(name:  "Test User2",
              email: "test2@user.de",
              password:              "test1234",
-             password_confirmation: "test1234")
+             password_confirmation: "test1234",
+             email_confirmed: true)
 
 User.create!(name:  "Torben",
              email: "torben@user.de",
              password:              "test112",
              password_confirmation: "test112",
-             admin: true)
+             admin: true,
+             email_confirmed: true)
 
 User.create!(name:  "Louisa",
              email: "louisa@user.de",
              password:              "test122",
              password_confirmation: "test122",
-             admin: true)
+             admin: true,
+             email_confirmed: true)
