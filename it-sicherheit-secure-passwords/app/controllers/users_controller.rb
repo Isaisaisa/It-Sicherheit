@@ -24,11 +24,9 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @user.email_token_time=DateTime.now
     if @user.save
       #log_in @user
       flash[:success] = "Successfully created User: " + @user.email
-      flash[:warning] = UserMailer.registration_confirmation(@user).to_s
       redirect_to @user
     else
       render 'new'
@@ -47,24 +45,6 @@ class UsersController < ApplicationController
     User.find(params[:id]).destroy
     flash[:success] = "User deleted"
     redirect_to users_url
-  end
-
-  def confirm_email
-    user = User.find_by_confirm_token(params[:id])
-    if user
-      if (user.email_token_time + 39.minutes) > DateTime.now
-        user.email_activate
-        flash[:success] = "Welcome to the Sample App! Your email has been confirmed.
-        Please sign in to continue."
-        redirect_to login_url
-      else
-        flash[:danger] = "Sorry. Tokentime expired"
-        redirect_to root_url
-      end
-    else
-      flash[:danger] = "Sorry. User does not exist"
-      redirect_to root_url
-    end
   end
 
   private
