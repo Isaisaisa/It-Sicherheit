@@ -20,7 +20,7 @@
 
 <!--<ul class="users">-->
   <% @users.each do |user| %>
-  <tr>
+  <tr class="index-table-row">
     <td class="index-table-inner"><%= link_to user.name, user %></td>
     <td class="index-table-inner"><%= user.email %></td>
     <td class="index-table-inner"><%= user.admin? %></td>
