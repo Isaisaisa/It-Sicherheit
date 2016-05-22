@@ -7,6 +7,9 @@ class User < ActiveRecord::Base
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates(:name, presence: true, length: { maximum: 75 })
   #validates(:email, presence: true, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false })
+  has_secure_password
+  validates(:password, presence: true, length: { minimum: 8 }, allow_nil: true)
+  validates_strength_of :password, :with => :email, :level => :strong, allow_nil: true
 
   validate do
     check_mail_correctness(email)
@@ -15,9 +18,6 @@ class User < ActiveRecord::Base
   validate do
     check_mail_correctness_with_nil(future_email)
   end
-
-  has_secure_password
-  validates(:password, presence: true, length: { minimum: 6 }, allow_nil: true)
 
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
