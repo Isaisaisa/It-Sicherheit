@@ -1,15 +1,45 @@
 <% provide(:title, 'All users') %>
 <h1>All users</h1>
 
-<ul class="users">
+<table>
+  <tr>
+    <th class="index-table-inner">Name</th>
+    <th class="index-table-inner">Email</th>
+    <th class="index-table-inner">Admin</th>
+    <th class="index-table-inner">Activated</th>
+    <th class="index-table-inner">Activation code expired</th>
+    <th class="index-table-inner">Password reset requested</th>
+    <th class="index-table-inner">Password reset requested expired</th>
+    <th class="index-table-inner">Email change requested</th>
+    <th class="index-table-inner">Email change requested expired</th>
+    <th class="index-table-inner">Email change requested email</th>
+    <th class="index-table-inner"></th>
+    <th class="index-table-inner"></th>
+
+  </tr>
+
+<!--<ul class="users">-->
   <% @users.each do |user| %>
-      <li>
-        <%= link_to user.name, user %>
+  <tr>
+    <td class="index-table-inner"><%= link_to user.name, user %></td>
+    <td class="index-table-inner"><%= user.email %></td>
+    <td class="index-table-inner"><%= user.admin? %></td>
+    <td class="index-table-inner"><%= user.activated? %></td>
+    <td class="index-table-inner"><%= user.activated? ? "-" : user.activation_expired? %></td>
+    <td class="index-table-inner"><%= !user.reset_digest.nil? %></td>
+    <td class="index-table-inner"><%= user.reset_digest.nil? ? "-" : user.password_reset_expired? %></td>
+    <td class="index-table-inner"><%= !user.email_change_digest.nil? %></td>
+    <td class="index-table-inner"><%= user.email_change_digest.nil? ? "-" : user.email_change_expired? %></td>
+    <td class="index-table-inner"><%= user.email_change_digest.nil? ? "-" : user.future_email %></td>
+
+    <td class="index-table-inner">
         <% if !current_user?(user) %>
-            | <%= link_to "delete", user, method: :delete,
+            <%= link_to "delete", user, method: :delete,
                           data: { confirm: "You sure?" } %>
         <% end %>
-        | <%= link_to "edit", edit_user_path(user) %>
-      </li>
+    </td>
+    <td class="index-table-inner"><%= link_to "edit", edit_user_path(user) %></td>
   <% end %>
-</ul>
+  </tr>
+<!--</ul>-->
+</table>

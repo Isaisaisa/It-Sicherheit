@@ -1,1 +1,18 @@
-<%= @user.name %>, <%= @user.email %>
+<% provide(:title, 'User Profile') %>
+<h1 xmlns="http://www.w3.org/1999/html">User Profile</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <table>
+      <tr><th>Name:</th><td><%= @user.name %></td></tr>
+      <tr><th>Email:</th><td><%= @user.email %></td></tr>
+      <tr><th>Admin:</th><td><%= @user.admin? %></td></tr>
+      <tr><th>Activated:</th><td><%= @user.activated? %></td></tr>
+      <tr><th>Activation code expired:</th><td><%= @user.activated? ? "-" : @user.activation_expired? %></td></tr>
+      <tr><th>Password reset requested:</th><td><%= !@user.reset_digest.nil? %></td></tr>
+      <tr><th>Password reset requested expired:</th><td><%= @user.reset_digest.nil? ? "-" : @user.password_reset_expired? %></td></tr>
+      <tr><th>Email change requested:</th><td><%= !@user.email_change_digest.nil? %></td></tr>
+      <tr><th>Email change requested expired:</th><td><%= @user.email_change_digest.nil? ? "-" : @user.email_change_expired? %></td></tr>
+      <tr><th>Email change requested email:</th><td><%= @user.email_change_digest.nil? ? "-" : @user.future_email %></td></tr>
+    </table>
+  </div>
+</div>

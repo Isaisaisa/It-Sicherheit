@@ -51,6 +51,8 @@ class User < ActiveRecord::Base
 
   def change_email
     update_attribute(:email, self.future_email)
+    update_attribute(:email_change_digest, nil)
+    update_attribute(:future_email, nil)
   end
 
   def send_activation_email
@@ -78,6 +80,10 @@ class User < ActiveRecord::Base
 
   def email_change_expired?
     self.email_change_sent_at < 30.minutes.ago
+  end
+
+  def clear_password_reset
+    update_attribute(:reset_digest,  nil)
   end
 
   private
