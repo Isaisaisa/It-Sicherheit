@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :logged_in_user, only: [:new, :create, :index, :edit, :update, :destroy]
   before_action :correct_user_or_admin,   only: [:edit, :update]
   before_action :admin_user,     only: [:new, :create, :index, :destroy]
-  before_action :check_email_change, only: [:update]
+  after_filter :update_flash_warning
 
   def index
     @users = User.all
@@ -14,11 +14,12 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if(@user.email == params[:future_send_email])
-      params[:future_email] = nil
-    else
-      params[:future_email] = params[:future_send_email]
-    end
+    # puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + params[:user][:future_send_email].to_s
+    # if(@user.email == params[:future_send_email])
+    #   params[:future_email] = nil
+    # else
+    #   params[:future_email] = params[:future_send_email]
+    # end
 
     if @user.update_attributes(user_update_params)
       flash[:success] = "Profile updated"
@@ -32,7 +33,6 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       @user.send_activation_email
-      flash[:warning] = UserMailer.account_activation(@user).to_s
       flash[:info] = "Please check your email to activate your account."
       redirect_to root_url
     else
@@ -62,7 +62,7 @@ class UsersController < ApplicationController
   end
 
   def user_update_params
-    params.require(:user).permit(:name, :password, :future_mail,
+    params.require(:user).permit(:name, :password, :future_send_email,
                                  :password_confirmation)
   end
 
@@ -88,9 +88,11 @@ class UsersController < ApplicationController
     redirect_to(root_url) unless current_user.admin? or current_user?(@user)
   end
 
-  def check_email_change
-    unless @user.email == params[:future_send_email]
-      @user.change_email(params[:future_send_email])
+  private
+
+  def update_flash_warning
+    if !@user.nil? && !@user.flash_warning.blank?
+      flash[:warning] = @user.flash_warning
     end
   end
 
