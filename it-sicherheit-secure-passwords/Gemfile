@@ -53,3 +53,8 @@ group :development do
   gem 'spring'
 end
 
+group :production do
+  # passenger server instead of webbrick
+  gem "passenger", "~> 4.0.20"
+end
+
