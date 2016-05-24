@@ -34,7 +34,7 @@ class UsersController < ApplicationController
     if @user.save
       @user.send_activation_email
       flash[:info] = "Please check your email to activate your account."
-      redirect_to root_url
+      redirect_to root_path
     else
       render 'new'
     end
@@ -51,7 +51,7 @@ class UsersController < ApplicationController
   def destroy
     User.find(params[:id]).destroy
     flash[:success] = "User deleted"
-    redirect_to users_url
+    redirect_to users_path
   end
 
   private
@@ -76,16 +76,16 @@ class UsersController < ApplicationController
 
   def correct_user
     @user = User.find(params[:id])
-    redirect_to(root_url) unless current_user?(@user)
+    redirect_to(root_path) unless current_user?(@user)
   end
 
   def admin_user
-    redirect_to(root_url) unless current_user.admin?
+    redirect_to(root_path) unless current_user.admin?
   end
 
   def correct_user_or_admin
     @user = User.find(params[:id])
-    redirect_to(root_url) unless current_user.admin? or current_user?(@user)
+    redirect_to(root_path) unless current_user.admin? or current_user?(@user)
   end
 
   private

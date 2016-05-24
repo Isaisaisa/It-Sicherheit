@@ -12,7 +12,7 @@ class AccountActivationsController < ApplicationController
       redirect_to user
     else
       flash[:danger] = "Invalid activation link"
-      redirect_to root_url
+      redirect_to root_path
     end
   end
 
@@ -28,14 +28,14 @@ class AccountActivationsController < ApplicationController
     unless (@user && !@user.activated? &&
         @user.authenticated?(:activation, params[:id]))
       flash[:danger] = "Invalid credentials"
-      redirect_to root_url
+      redirect_to root_path
     end
   end
 
   def check_expiration
     if @user.activation_expired?
       flash[:danger] = "Activation has expired."
-      redirect_to root_url
+      redirect_to root_path
     end
   end
 
