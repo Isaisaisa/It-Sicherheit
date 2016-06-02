@@ -11,7 +11,11 @@ Rails.application.routes.draw do
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
-  resources :users
+  resources :users do
+    member do
+      get 'certificate'
+    end
+  end
   resources :account_activations, only: [:edit]
   resources :email_change, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]

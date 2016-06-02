@@ -1,5 +1,10 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:new, :create, :index, :edit, :update, :destroy]
+  PKI_DIR = "/opt/pki"
+  CERT_DIR = "#{PKI_DIR}/certs"
+  CONF_DIR = "#{PKI_DIR}/etc"
+  CA_DIR = "#{PKI_DIR}/ca"
+  before_action :logged_in_user, only: [:new, :create, :index, :edit, :update, :destroy, :certificate]
+  before_action :correct_user, only: [:certificate]
   before_action :correct_user_or_admin,   only: [:edit, :update]
   before_action :admin_user,     only: [:new, :create, :index, :destroy]
   after_filter :update_flash_warning
@@ -54,6 +59,11 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
 
+  def certificate
+    create_p12 unless File.file?("#{CERT_DIR}/#{current_user.email}.p12")
+    send_file("#{CERT_DIR}/#{current_user.email}.p12", filename: "#{current_user.email}.p12", type: "application/x-pkcs12")
+  end
+
   private
 
   def user_params
@@ -93,6 +103,35 @@ class UsersController < ApplicationController
   def update_flash_warning
     if !@user.nil? && !@user.flash_warning.blank?
       flash[:warning] = @user.flash_warning
+    end
+  end
+
+
+
+  def create_p12
+    subj = "/C=DE/O=HAW-HAMBURG/OU=INFORMATIK/CN=#{current_user.email})/emailAddress=#{current_user.email}"
+    dir_name  = "#{CERT_DIR}"
+    Dir.mkdir(dir_name) unless File.directory?(dir_name)
+    create_cert(subj)
+    sign_cert
+    generate_p12
+  end
+
+  def create_cert(subj)
+    Dir.chdir(PKI_DIR) do
+      system("openssl req -new -config #{CONF_DIR}/client.conf -out #{CERT_DIR}/#{current_user.email}.csr -keyout #{CERT_DIR}/#{current_user.email}.key -subj '#{subj}' -passout pass:password -batch")
+    end
+  end
+
+  def sign_cert
+    Dir.chdir(PKI_DIR) do
+      system("openssl ca -config #{CONF_DIR}/ssl-ca.conf -in #{CERT_DIR}/#{current_user.email}.csr -out #{CERT_DIR}/#{current_user.email}.crt -policy extern_pol -extensions client_ext -passin pass:password -batch")
+    end
+  end
+
+  def generate_p12
+    Dir.chdir(PKI_DIR) do
+      system("openssl pkcs12 -export -clcerts -in #{CERT_DIR}/#{current_user.email}.crt -certfile #{CA_DIR}/ssl-ca-chain.pem -inkey #{CERT_DIR}/#{current_user.email}.key -out #{CERT_DIR}/#{current_user.email}.p12 -name #{current_user.email} -passout pass:password")
     end
   end
 
