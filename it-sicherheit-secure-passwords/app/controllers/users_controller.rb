@@ -131,7 +131,7 @@ class UsersController < ApplicationController
 
   def generate_p12
     Dir.chdir(PKI_DIR) do
-      system("openssl pkcs12 -export -clcerts -in #{CERT_DIR}/#{current_user.email}.crt -certfile #{CA_DIR}/ssl-ca-chain.pem -inkey #{CERT_DIR}/#{current_user.email}.key -out #{CERT_DIR}/#{current_user.email}.p12 -name #{current_user.email} -passout pass:password")
+      system("openssl pkcs12 -export -clcerts -in #{CERT_DIR}/#{current_user.email}.crt -certfile #{CA_DIR}/ssl-ca-chain.pem -inkey #{CERT_DIR}/#{current_user.email}.key -out #{CERT_DIR}/#{current_user.email}.p12 -name #{current_user.email} -passout pass:password -passin pass:password")
     end
   end
 

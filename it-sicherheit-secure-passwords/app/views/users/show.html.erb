@@ -14,6 +14,6 @@
       <tr><th>Email change requested expired:</th><td><%= @user.email_change_digest.nil? ? "-" : @user.email_change_expired? %></td></tr>
       <tr><th>Email change requested email:</th><td><%= @user.email_change_digest.nil? ? "-" : @user.future_email %></td></tr>
     </table>
-    <%= link_to "Get Certificate", @user, method: :certificate %>
+    <%= link_to "Get Certificate", @user, method: user_certificate_path %>
   </div>
 </div>
