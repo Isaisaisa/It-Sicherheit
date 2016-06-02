@@ -1,5 +1,9 @@
 class SessionsController < ApplicationController
   def new
+    flash[:success] = request.env['SSL_CLIENT_S_DN']
+    flash[:warning] = request.env['SSL_CLIENT_VERIFY']
+	flash[:danger] = request.env['SSL-Subject']
+	
   end
 
   def create
