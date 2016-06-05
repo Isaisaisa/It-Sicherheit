@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     if request.env['SSL_CLIENT_VERIFY'] == "SUCCESS"
       userid = -1
       request.env['SSL_CLIENT_S_DN'].split(',').each{ |param| param.start_with?("CN") ? userid = param.split('=')[1] : nil}
-      user = User.find(userid)
+      user = User.find_by(id: userid)
       if user
         loginuser(user)
       else
