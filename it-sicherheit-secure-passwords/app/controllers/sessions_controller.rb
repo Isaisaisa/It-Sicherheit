@@ -7,22 +7,18 @@ class SessionsController < ApplicationController
   end
 
   def createcert
-
+    if request.env['SSL_CLIENT_VERIFY'] == "SUCCESS"
+      user = User.find_by(id: request.env['SSL-Client-CN'])
+      loginuser(user)
+    else
+      flash[:danger] = "Invalid Certificate"
+    end
   end
-  
+
   def create
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
-      if user.activated?
-        log_in user
-        params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-        redirect_back_or user
-      else
-        message  = "Account not activated. "
-        message += "Check your email for the activation link."
-        flash[:warning] = message
-        redirect_to root_path
-      end
+      loginuser(user)
     else
       flash[:danger] = 'Invalid email/password combination'
       render 'new'
@@ -32,5 +28,20 @@ class SessionsController < ApplicationController
   def destroy
     log_out if logged_in?
     redirect_to root_path
+  end
+
+  private
+
+  def loginuser(user)
+    if user.activated?
+      log_in user
+      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+      redirect_back_or user
+    else
+      message  = "Account not activated. "
+      message += "Check your email for the activation link."
+      flash[:warning] = message
+      redirect_to root_path
+    end
   end
 end
