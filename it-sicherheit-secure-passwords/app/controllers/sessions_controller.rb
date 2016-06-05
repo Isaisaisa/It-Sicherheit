@@ -1,19 +1,19 @@
 class SessionsController < ApplicationController
+
   def new
-    flash[:success] = request.env['SSL_CLIENT_S_DN']
-    flash[:warning] = request.env['SSL_CLIENT_VERIFY']
-	flash[:danger] = request.env['SSL-Subject']
-	
   end
 
   def createcert
     if request.env['SSL_CLIENT_VERIFY'] == "SUCCESS"
       userid = -1
       request.env['SSL_CLIENT_S_DN'].split(',').each{ |param| param.start_with?("CN") ? userid = param.split('=')[1] : nil}
-      puts "userid: " + userid
       user = User.find(userid)
-      puts "createcert user: " + user.to_s
-      loginuser(user)
+      if user
+        loginuser(user)
+      else
+        flash[:danger] = "User not found"
+        redirect_to root_path
+      end
     else
       flash[:danger] = "Invalid Certificate"
       redirect_to root_path
