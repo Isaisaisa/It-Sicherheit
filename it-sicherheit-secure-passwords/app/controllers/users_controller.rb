@@ -63,7 +63,7 @@ class UsersController < ApplicationController
     if File.file?("#{CERT_DIR}/#{current_user.id.to_s}.p12")
       send_file("#{CERT_DIR}/#{current_user.id.to_s}.p12", filename: "#{current_user.id.to_s}.p12", type: "application/x-pkcs12")
     else
-      redirect_to certificatepassword
+      redirect_to certificatepassword_user_path
     end
   end
 
@@ -78,7 +78,7 @@ class UsersController < ApplicationController
       redirect_to @user
     else
       flash[:danger] = "Wrong Password"
-      redirect_to certificatepassword
+      redirect_to certificatepassword_user_path
     end
   end
 
