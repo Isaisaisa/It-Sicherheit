@@ -8,8 +8,8 @@ class SessionsController < ApplicationController
 
   def createcert
     if request.env['SSL_CLIENT_VERIFY'] == "SUCCESS"
-      puts "userid: " + request.env['SSL_CLIENT_S_DN'].split(',').each{ |param| param.start_with?("CN"); return param.split('=')[1]}
-      user = User.find_by(id: request.env['SSL_CLIENT_S_DN'].split(',').each{ |param| param.start_with?("CN"); return param.split('=')[1]})
+      puts "userid: " + request.env['SSL_CLIENT_S_DN'].split(',').each{ |param| param.start_with?("CN") ? return param.split('=')[1] : nil}
+      user = User.find_by(id: request.env['SSL_CLIENT_S_DN'].split(',').each{ |param| param.start_with?("CN") ? return param.split('=')[1] : nil})
       loginuser(user)
     else
       flash[:danger] = "Invalid Certificate"
