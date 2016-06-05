@@ -60,8 +60,8 @@ class UsersController < ApplicationController
   end
 
   def certificate
-    create_p12 unless File.file?("#{CERT_DIR}/#{current_user.email}.p12")
-    send_file("#{CERT_DIR}/#{current_user.email}.p12", filename: "#{current_user.email}.p12", type: "application/x-pkcs12")
+    create_p12 unless File.file?("#{CERT_DIR}/#{current_user.id.to_s}.p12")
+    send_file("#{CERT_DIR}/#{current_user.id.to_s}.p12", filename: "#{current_user.id.to_s}.p12", type: "application/x-pkcs12")
   end
 
   private
