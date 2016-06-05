@@ -109,7 +109,7 @@ class UsersController < ApplicationController
 
 
   def create_p12
-    subj = "/C=DE/O=HAW-HAMBURG/OU=INFORMATIK/CN=#{current_user.id.to_s})"
+    subj = "/C=DE/O=HAW-HAMBURG/OU=INFORMATIK/CN=#{current_user.id.to_s}"
     dir_name  = "#{CERT_DIR}"
     Dir.mkdir(dir_name) unless File.directory?(dir_name)
     create_cert(subj)
