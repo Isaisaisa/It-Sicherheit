@@ -61,7 +61,7 @@ class UsersController < ApplicationController
 
   def certificate
     if File.file?("#{CERT_DIR}/#{current_user.id.to_s}.p12")
-      send_file("#{CERT_DIR}/#{current_user.id.to_s}.p12", filename: "#{current_user.id.to_s}.p12", type: "application/x-pkcs12")
+      send_file("#{CERT_DIR}/#{current_user.id.to_s}.p12", filename: "TeamTL#{current_user.id.to_s}.p12", type: "application/x-pkcs12")
     else
       redirect_to certificatepassword_user_path
     end
@@ -74,7 +74,7 @@ class UsersController < ApplicationController
   def createcertificate
     if @user.authenticate(params[:user][:password])
       create_p12 params[:user][:password]
-      send_file("#{CERT_DIR}/#{current_user.id.to_s}.p12", filename: "#{current_user.id.to_s}.p12", type: "application/x-pkcs12")
+      send_file("#{CERT_DIR}/#{current_user.id.to_s}.p12", filename: "TeamTL#{current_user.id.to_s}.p12", type: "application/x-pkcs12")
     else
       flash[:danger] = "Wrong Password"
       redirect_to certificatepassword_user_path
@@ -148,7 +148,7 @@ class UsersController < ApplicationController
 
   def generate_p12(password)
     Dir.chdir(PKI_DIR) do
-      system("openssl pkcs12 -export -clcerts -in #{CERT_DIR}/#{current_user.id.to_s}.crt -certfile #{CA_DIR}/ssl-ca-chain.pem -inkey #{CERT_DIR}/#{current_user.id.to_s}.key -out #{CERT_DIR}/#{current_user.id.to_s}.p12 -name #{current_user.id.to_s} -passout pass:'#{password}' -passin pass:'#{password}'")
+      system("openssl pkcs12 -export -clcerts -in #{CERT_DIR}/#{current_user.id.to_s}.crt -certfile #{CA_DIR}/ssl-ca-chain.pem -inkey #{CERT_DIR}/#{current_user.id.to_s}.key -out #{CERT_DIR}/#{current_user.id.to_s}.p12 -name 'TeamTL: #{current_user.id.to_s}' -passout pass:'#{password}' -passin pass:'#{password}'")
     end
   end
 
