@@ -41,7 +41,9 @@ class SessionsController < ApplicationController
     puts "loginuser user: " + user.to_s
     if user.activated?
       log_in user
-      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+      if params[:session]
+        params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+      end
       redirect_back_or user
     else
       message  = "Account not activated. "
