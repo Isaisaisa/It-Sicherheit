@@ -12,6 +12,7 @@ class SessionsController < ApplicationController
       request.env['SSL_CLIENT_S_DN'].split(',').each{ |param| param.start_with?("CN") ? userid = param.split('=')[1] : nil}
       puts "userid: " + userid
       user = User.find(userid)
+      puts "createcert user: " + user.to_s
       loginuser(user)
     else
       flash[:danger] = "Invalid Certificate"
@@ -37,6 +38,7 @@ class SessionsController < ApplicationController
   private
 
   def loginuser(user)
+    puts "loginuser user: " + user.to_s
     if user.activated?
       log_in user
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
