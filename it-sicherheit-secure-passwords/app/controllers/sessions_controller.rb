@@ -12,6 +12,7 @@ class SessionsController < ApplicationController
       loginuser(user)
     else
       flash[:danger] = "Invalid Certificate"
+      redirect_to root_path
     end
   end
 
