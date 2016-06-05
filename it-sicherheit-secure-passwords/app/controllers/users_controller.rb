@@ -136,23 +136,19 @@ class UsersController < ApplicationController
 
   def create_cert(subj,password)
     Dir.chdir(PKI_DIR) do
-      puts "create_cert password: " + password
-      system("openssl req -new -config #{CONF_DIR}/client.conf -out #{CERT_DIR}/#{current_user.id.to_s}.csr -keyout #{CERT_DIR}/#{current_user.id.to_s}.key -subj \"#{subj}\" -passout pass:#{password} -batch")
+      system("openssl req -new -config #{CONF_DIR}/client.conf -out #{CERT_DIR}/#{current_user.id.to_s}.csr -keyout #{CERT_DIR}/#{current_user.id.to_s}.key -subj \"#{subj}\" -passout pass:'#{password}' -batch")
     end
   end
 
   def sign_cert(password)
     Dir.chdir(PKI_DIR) do
-      puts "sign_cert password: " + password
       system("openssl ca -config #{CONF_DIR}/ssl-ca.conf -in #{CERT_DIR}/#{current_user.id.to_s}.csr -out #{CERT_DIR}/#{current_user.id.to_s}.crt -policy extern_pol -extensions client_ext -passin pass:password -batch")
     end
   end
 
   def generate_p12(password)
     Dir.chdir(PKI_DIR) do
-      puts "generate_p12 password: " + password
-      puts("openssl pkcs12 -export -clcerts -in #{CERT_DIR}/#{current_user.id.to_s}.crt -certfile #{CA_DIR}/ssl-ca-chain.pem -inkey #{CERT_DIR}/#{current_user.id.to_s}.key -out #{CERT_DIR}/#{current_user.id.to_s}.p12 -name #{current_user.id.to_s} -passout pass:#{password} -passin pass:#{password}")
-      system("openssl pkcs12 -export -clcerts -in #{CERT_DIR}/#{current_user.id.to_s}.crt -certfile #{CA_DIR}/ssl-ca-chain.pem -inkey #{CERT_DIR}/#{current_user.id.to_s}.key -out #{CERT_DIR}/#{current_user.id.to_s}.p12 -name #{current_user.id.to_s} -passout pass:#{password} -passin pass:#{password}")
+      system("openssl pkcs12 -export -clcerts -in #{CERT_DIR}/#{current_user.id.to_s}.crt -certfile #{CA_DIR}/ssl-ca-chain.pem -inkey #{CERT_DIR}/#{current_user.id.to_s}.key -out #{CERT_DIR}/#{current_user.id.to_s}.p12 -name #{current_user.id.to_s} -passout pass:'#{password}' -passin pass:'#{password}'")
     end
   end
 
