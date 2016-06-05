@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
 
   def createcert
     if request.env['SSL_CLIENT_VERIFY'] == "SUCCESS"
-      puts "userid: " + request.env['SSL-Client-CN']
+      puts "userid: " + request.env['SSL-Client-CN'].to_s
       user = User.find_by(id: request.env['SSL-Client-CN'])
       loginuser(user)
     else
