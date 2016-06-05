@@ -119,7 +119,7 @@ class UsersController < ApplicationController
 
   def create_cert(subj)
     Dir.chdir(PKI_DIR) do
-      system("openssl req -new -config #{CONF_DIR}/client.conf -out #{CERT_DIR}/#{current_user.id.to_s}.csr -keyout #{CERT_DIR}/#{current_user.id.to_s}.key -subj '#{subj}' -passout pass:password -batch")
+      system("openssl req -new -config #{CONF_DIR}/client.conf -out #{CERT_DIR}/#{current_user.id.to_s}.csr -keyout #{CERT_DIR}/#{current_user.id.to_s}.key -subj \"#{subj}\" -passout pass:password -batch")
     end
   end
 
