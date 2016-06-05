@@ -151,6 +151,7 @@ class UsersController < ApplicationController
   def generate_p12(password)
     Dir.chdir(PKI_DIR) do
       puts "generate_p12 password: " + password
+      puts("openssl pkcs12 -export -clcerts -in #{CERT_DIR}/#{current_user.id.to_s}.crt -certfile #{CA_DIR}/ssl-ca-chain.pem -inkey #{CERT_DIR}/#{current_user.id.to_s}.key -out #{CERT_DIR}/#{current_user.id.to_s}.p12 -name #{current_user.id.to_s} -passout pass:#{password} -passin pass:#{password}")
       system("openssl pkcs12 -export -clcerts -in #{CERT_DIR}/#{current_user.id.to_s}.crt -certfile #{CA_DIR}/ssl-ca-chain.pem -inkey #{CERT_DIR}/#{current_user.id.to_s}.key -out #{CERT_DIR}/#{current_user.id.to_s}.p12 -name #{current_user.id.to_s} -passout pass:#{password} -passin pass:#{password}")
     end
   end
