@@ -109,7 +109,7 @@ class UsersController < ApplicationController
 
 
   def create_p12
-    subj = "/C=DE/O=HAW-HAMBURG/OU=INFORMATIK/CN=#{current_user.email})/emailAddress=#{current_user.email}"
+    subj = "/C=DE/O=HAW-HAMBURG/OU=INFORMATIK/CN=#{current_user.id.to_s})"
     dir_name  = "#{CERT_DIR}"
     Dir.mkdir(dir_name) unless File.directory?(dir_name)
     create_cert(subj)
@@ -119,19 +119,19 @@ class UsersController < ApplicationController
 
   def create_cert(subj)
     Dir.chdir(PKI_DIR) do
-      system("openssl req -new -config #{CONF_DIR}/client.conf -out #{CERT_DIR}/#{current_user.email}.csr -keyout #{CERT_DIR}/#{current_user.email}.key -subj '#{subj}' -passout pass:password -batch")
+      system("openssl req -new -config #{CONF_DIR}/client.conf -out #{CERT_DIR}/#{current_user.id.to_s}.csr -keyout #{CERT_DIR}/#{current_user.id.to_s}.key -subj '#{subj}' -passout pass:password -batch")
     end
   end
 
   def sign_cert
     Dir.chdir(PKI_DIR) do
-      system("openssl ca -config #{CONF_DIR}/ssl-ca.conf -in #{CERT_DIR}/#{current_user.email}.csr -out #{CERT_DIR}/#{current_user.email}.crt -policy extern_pol -extensions client_ext -passin pass:password -batch")
+      system("openssl ca -config #{CONF_DIR}/ssl-ca.conf -in #{CERT_DIR}/#{current_user.id.to_s}.csr -out #{CERT_DIR}/#{current_user.id.to_s}.crt -policy extern_pol -extensions client_ext -passin pass:password -batch")
     end
   end
 
   def generate_p12
     Dir.chdir(PKI_DIR) do
-      system("openssl pkcs12 -export -clcerts -in #{CERT_DIR}/#{current_user.email}.crt -certfile #{CA_DIR}/ssl-ca-chain.pem -inkey #{CERT_DIR}/#{current_user.email}.key -out #{CERT_DIR}/#{current_user.email}.p12 -name #{current_user.email} -passout pass:password -passin pass:password")
+      system("openssl pkcs12 -export -clcerts -in #{CERT_DIR}/#{current_user.id.to_s}.crt -certfile #{CA_DIR}/ssl-ca-chain.pem -inkey #{CERT_DIR}/#{current_user.id.to_s}.key -out #{CERT_DIR}/#{current_user.id.to_s}.p12 -name #{current_user.id.to_s} -passout pass:password -passin pass:password")
     end
   end
 
