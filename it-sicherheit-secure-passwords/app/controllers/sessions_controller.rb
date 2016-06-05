@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       userid = -1
       request.env['SSL_CLIENT_S_DN'].split(',').each{ |param| param.start_with?("CN") ? userid = param.split('=')[1] : nil}
       puts "userid: " + userid
-      user = User.find_by(id: userid)
+      user = User.find_by(userid)
       loginuser(user)
     else
       flash[:danger] = "Invalid Certificate"
