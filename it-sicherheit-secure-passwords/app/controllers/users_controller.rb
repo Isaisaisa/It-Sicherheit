@@ -3,8 +3,8 @@ class UsersController < ApplicationController
   CERT_DIR = "#{PKI_DIR}/certs"
   CONF_DIR = "#{PKI_DIR}/etc"
   CA_DIR = "#{PKI_DIR}/ca"
-  before_action :logged_in_user, only: [:new, :create, :index, :edit, :update, :destroy, :certificate]
-  before_action :correct_user, only: [:certificate]
+  before_action :logged_in_user, only: [:new, :create, :index, :edit, :update, :destroy, :certificate, :certificatepassword, :createcertificate]
+  before_action :correct_user, only: [:certificate, :certificatepassword, :createcertificate]
   before_action :correct_user_or_admin,   only: [:edit, :update]
   before_action :admin_user,     only: [:new, :create, :index, :destroy]
   after_filter :update_flash_warning
