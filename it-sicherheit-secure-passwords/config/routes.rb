@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   resources :users do
     member do
       get 'certificate'
+      get 'certificatepassword'
+      post 'createcertificate'
     end
   end
   resources :account_activations, only: [:edit]
