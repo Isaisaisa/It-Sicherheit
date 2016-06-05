@@ -1,5 +1,6 @@
 module SessionsHelper
   def log_in(user)
+    puts "log_in user Id: " + user.id.to_s
     session[:user_id] = user.id
   end
 
@@ -43,6 +44,7 @@ module SessionsHelper
 
   # Redirects to stored location (or to the default).
   def redirect_back_or(default)
+    puts "redirect_back_or user default: " + default.to_s
     redirect_to(session[:forwarding_url] || default)
     session.delete(:forwarding_url)
   end
